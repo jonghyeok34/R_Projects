@@ -252,6 +252,7 @@
     
     #1) 성별 직업 빈도표 만들기
       
+   
       # 남성 직업 빈도 상위 10 개 추출
       job_male <- welfare %>%
         filter(!is.na(job) & sex =="male") %>%
@@ -370,7 +371,7 @@
         group_by(ageg) %>%
         mutate(pct= round(n/sum(n)*100,1))
 
-    ageg_marriage  
+    ageg_marriage
     
     #2)연령대별 이혼율 그래프
     
@@ -378,7 +379,7 @@
         filter(ageg != "young" & group_marriage == "divorce" ) %>%
         select(ageg, pct)
       
-      ageg_divorce      
+      ageg_divorce
        
       #그래프 만들기
       ggplot(data=ageg_divorce, aes(x=ageg, y=pct)) + geom_col()
