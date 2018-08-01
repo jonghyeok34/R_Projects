@@ -31,6 +31,7 @@ setwd("C:/Users/Administrator/Documents/GitHub/R_Projects/rwork")
   df %>% filter(!is.na(sex))  
   
   df_nomiss <- df %>% filter(!is.na(score))
+  
   mean(df_nomiss$score)  
   
   sum(df_nomiss$score)  
@@ -100,5 +101,30 @@ setwd("C:/Users/Administrator/Documents/GitHub/R_Projects/rwork")
                          score=c(5,4,3,4,2,6))
     outlier
     
+  #이상치 확인하기
+    table(outlier$sex)
+    table(outlier$score)    
     
+  #결측 처리
+    outlier$sex <- ifelse(outlier$sex ==3 , NA, outlier$sex)
+    outlier    
+    
+    outlier$score <- ifelse(outlier$score >5, NA, outlier$score)
+    outlier  
+    
+  #결측치를 제외하고 분석  
+    outlier %>%
+      filter(!is.na(sex) & !is.na(score)) %>%
+      group_by(sex) %>%
+      summarise(mean_score = mean(score))
+    
+    
+    
+    outlier$sex <- 
+      ifelse(my_outlier$sex ==1, "M",
+             ifelse(my_outlier$sex ==2, "F", my_outlier$sex))
+    outlier %>%
+      filter(!is.na(sex) & !is.na(score)) %>%
+      group_by(sex) %>%
+      summarise(mean_score =mean(score))
     
